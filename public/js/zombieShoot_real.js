@@ -215,7 +215,7 @@ function openQRcode() {
   $.dialog({
     theme: 'light',
     title: 'お友達に教えてね',
-    content: '<center><img src="./qrcode/zombieShoot.png"></img></center>',
+    content: '<center><img src="./qrcode/zombieShoot_real.png"></img></center>',
     closeIcon: true,
   })
 };
