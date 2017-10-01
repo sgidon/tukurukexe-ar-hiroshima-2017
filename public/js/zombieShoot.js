@@ -5,7 +5,7 @@ var sceneObj, plane;
 
 var targetObj = "";
 var playerAliveFlg = true;
-var zombieCnt = 100;
+var zombieCnt = 50;
 var zombieCreateCnt = 0;
 var zombieDeathCnt = 0;
 
@@ -20,7 +20,7 @@ function createZombie() {
   z_min = rad_min * Math.sin(angle / 180 * Math.PI);
   plane.setAttribute("position",x + " -1.5 " + z);
   plane.setAttribute("material","shader: standard; transparent: true; side: double;");
-  if (zombieCreateCnt == 70) {
+  if (zombieCreateCnt == 40) {
     plane.setAttribute("width",3);
     plane.setAttribute("height",5);
     plane.setAttribute("src","./images/zombie3.png");
@@ -46,7 +46,7 @@ function createZombie() {
     if (zombieCreateCnt <= 20) {
       setTimeout(createZombie, 3000);
     } else {
-      setTimeout(createZombie, 1000);
+      setTimeout(createZombie, 1500);
     }
   }
 }
@@ -94,6 +94,15 @@ function clear_js() {
   textObj.emit("clear");
   
   updateStatus("clear", zombieDeathCnt);
+
+  setTimeout(function() {
+    $.dialog({
+      theme: 'light',
+      title: 'AR勉強会に来てね',
+      content: 'AR勉強会ブースで別のゲームがもらえるよ！<br />ぜひ遊びに来てね',
+      closeIcon: true,
+    })
+  }, 2000)
 }
 
 // GAME OVER時処理

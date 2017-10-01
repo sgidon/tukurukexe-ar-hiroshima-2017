@@ -155,7 +155,15 @@ function clear_js() {
   textObj.setAttribute("text", "align:center; baseline:center; value:GAME CLEAR!!\n" + timeStr + "; width:10; height:10");
   textObj.emit("clear");
   updateStatus("clear", document.getElementById("lapText").value);
-};
+
+  setTimeout(function () {
+    $.dialog({
+      theme: 'light',
+      title: 'AR勉強会に来てね',
+      content: 'AR勉強会ブースで別のゲームがもらえるよ！<br />ぜひ遊びに来てね',
+      closeIcon: true,
+    })
+  }, 2000)};
 
 // onload時処理
 function onloadFunction() {

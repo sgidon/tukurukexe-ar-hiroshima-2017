@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <title>Zombie Shooting Real - A-Frame</title>
+  <meta name="description" content="Zombie Shooting Real - A-Frame">
+  <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+<!--
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v3.11.2/dist/aframe-extras.min.js"></script>
+-->
+  <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
+  <script src="./js/firebase.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+
+  <script src="./js/zombieShoot_real.js"></script>
+</head>
+
+<body onload="onloadFunction();">
+  <div>
+    <img id="img-qrcode" src="./images/qrcode.png" height="30px" onclick="openQRcode();" ; style="position:absolute; top:5px; right:5px; z-index:999;"></img>
+  </div>
+
+  <a-scene id="scene_id" vr-mode-ui="enabled:false">
+    <a-assets>
+<!--
+        <a-asset-item id="zombie_park" src="./models/zombie_zombie_secret_map/scene.gltf"></a-asset-item>
+-->
+      <a-asset-item id="zombie_park" src="./models/fort_ord_room/scene.gltf"></a-asset-item>
+      <a-asset-item id="zombie01" src="./models/zombie_model_animation/scene.gltf"></a-asset-item>
+      <a-asset-item id="zombie02" src="./models/giant_ironstone_bug_-_low_spec_ver_moblie_game/scene.gltf"></a-asset-item>
+      <a-asset-item id="zombie03" src="./models/doom_3_-_hell_knight/scene.gltf"></a-asset-item>
+    </a-assets>
+    <a-entity id="camera_id" camera look-controls wasd-controls="enabled:false" position="0 1.6 0">
+      <a-entity id="raycaster_id" raycaster="objects: .zombie_class" cursor="fuse:false" position="0 0 -1" geometry="primitive:ring; radiusInner:0.02; radiusOuter:0.03;"
+        material="color:red; shader:flat">
+      </a-entity>
+      <a-light color="#ccc" position="0 0 0" distance="100" intensity="0.3" type="point">
+      </a-light>
+      <a-light color="#ccc" position="0 -0.3 -0.1" rotation="0 0 0" type="spot" angle="30" distane="100" decay=1 intensity="1.5">
+        <a-animation attribute="intensity" from="2" to="1.5" direction="alternate" dur="10000" repeat="indefinite" easing="linear">
+        </a-animation>
+      </a-light>
+      <a-entity id="target_object" position="0 -1.6 0"></a-entity>
+
+      <a-entity id="text_id" text="align:center; baseline:center; value:3; width:10; height:10" position="0 0 -1" scale="0 0 0">
+        <a-animation attribute="scale" dur=1000 from="8 8 0" to="0 0 0" direction="normal" repeat="0" begin="start"></a-animation>
+        <a-animation attribute="scale" dur=1000 from="8 8 0" to="0.3 0.3 0" direction="normal" repeat="0" begin="clear"></a-animation>
+      </a-entity>
+    </a-entity>
+    <a-entity gltf-model="#zombie_park" position="-5 2.5 0" scale="3 3 3"></a-entity>
+
+    <!-- sky -->
+    <a-sky color="#000"></a-sky>
+  </a-scene>
+
+  <div>
+    <img id="shoot_btn_id" src="./images/button.png" width="100px" height="100px" style="position:absolute; bottom:50px; right:20px; z-index:999;"
+      onClick="targetClick();">
+  </div>
+
+  <div id="text_gameover_id" style="display:none; font-size:4em; color:#FFFFFF; background-color:red; position:absolute; z-index:800; top:50%; left:50%; width:100vw; line-height:20vh; margin:-10vh 0 0 -50vw; text-align:center;">GAME OVER</div>
+
+</body>
+
+</html>
