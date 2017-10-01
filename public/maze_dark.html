@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <title>maze dark - A-Frame</title>
+  <meta name="description" content="maze dark- A-Frame">
+  <script src="https://aframe.io/releases/0.6.0/aframe.min.js"></script>
+  <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v2.5.3/dist/aframe-extras.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
+  <script src="./js/firebase.js"></script>
+  <script src="./js/maze_dark.js"></script>
+
+</head>
+
+  <body onload="start_js()">
+
+    <a-scene id="maze-scene" physics fog="type: linear; color: #000; far:20" vr-mode-ui="enabled:false;">
+      <a-assets>
+        <img id="stoneWall" src="./images/IMG_1645.jpg">
+      </a-assets>
+      <!-- Player -->
+      <a-entity id="maze-player"
+                camera
+                kinematic-body
+                look-controls
+                wasd-controls="enabled: false"
+                position="0 1.764 0">
+        <a-light color="#ccc" position="0 0 0" distance="100" intensity="0.1" type="point"></a-light>
+        <a-light color="#ccc" position="0 -0.3 -0.1" rotation="10 0 0" type="spot" angle="30" distane="100" decay="1" intensity="0.8"></a-light>
+          <a-animation attribute="intensity" from="0.8" to="0.1" direction="alternate" dur="10000" repeat="indefinite" easing="linear"></a-animation>
+        </a-light>
+        <a-entity id="text_id" text="align:center; baseline:center; value:3; width:10; height:10;" position="0 0 -1" scale="0 0 0">
+          <a-animation attribute="scale" dur=1000 from="10 10 0" to="0 0 0" direction="normal" repeat="0" begin="start"></a-animation>
+        </a-entity>
+      </a-entity>
+
+      <!-- Ground -->
+      <a-grid id="maze-grid" width="1000" height="1000" src="#stoneWall" static-body></a-grid>
+
+      <!-- Lighting -->
+      <a-sky color="#000"></a-sky>
+
+    </a-scene>
+  </body>
+
+  <script>
+
+  var map = makeMaze();   // 迷路ロジックの結果（二次元配列）。1が壁を示す。
+  var width = 3;          // 壁の幅を設定
+  var posX = -1 * width;  // 最初の壁のX座標
+  var posZ = -1 * width;  // 最初の壁のZ座標
+
+  // 迷路図作成
+  for (var z = 0; z < map.length; z++) {
+    for (var x = 0; x < map[0].length; x++) {
+      if (map[z][x] == 1) {
+        if (x == map[0].length - 1) {
+          makeWall(x+":"+z, posX, posZ, width);
+          posX = -1 * width;
+          posZ = posZ + width;
+        } else {
+          makeWall(x+":"+z, posX, posZ, width);
+          posX = posX + width;
+        }
+      } else {
+        posX = posX + width;
+      }
+    }
+  }
+
+  function start_js() {
+    var textObj = document.getElementById("text_id");
+    var cameraObj = document.getElementById("maze-player");
+    textObj.emit("start");
+
+    setTimeout(() => {
+      textObj.setAttribute("text","align:center; baseline:center; value:2; width:10; height:10");
+      textObj.emit("start");
+      console.log("3")
+      setTimeout(() => {
+        textObj.setAttribute("text","align:center; baseline:center; value:1; width:10; height:10");
+        textObj.emit("start");
+        console.log("2")
+        setTimeout(() => {
+          textObj.setAttribute("text","align:center; baseline:center; value:GO!!; width:10; height:10");
+          textObj.setAttribute("color","red");
+          textObj.emit("start");
+          console.log("1")
+
+          // START後の動作を記載する。
+          cameraObj.setAttribute("universal-controls","");
+          
+        }, 1100);
+      }, 1100);
+    }, 1100);
+  }
+ 
+</script>
+</html>

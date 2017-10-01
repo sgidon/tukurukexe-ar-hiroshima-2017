@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <title>maze - A-Frame</title>
+  <meta name="description" content="maze - A-Frame">
+  <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+  <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v3.7.0/dist/aframe-extras.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
+  <script src="./js/firebase.js"></script>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+ 
+  <script src="./js/maze.js"></script>
+
+</head>
+
+<body onload="onloadFunction();">
+  <div>
+    <input id="lapText" type="text" value="00:00" style="position:absolute; top:5px; right:45px; z-index:999; width:40px; background-color:white; text-align:center; color:black;">
+    <img id="img-qrcode" src="./images/qrcode.png" height="30px" onclick="openQRcode();" ; style="position:absolute; top:5px; right:5px; z-index:999;"></img>
+  </div>
+
+  <a-scene id="maze-scene" physics vr-mode-ui="enabled: false">
+    <!-- Player -->
+    <a-entity id="maze-player" camera look-controls time-cnt kinematic-body position="0 1.764 0">
+      <a-entity id="text_id" text="align:center; baseline:center; value:3; width:10; height:10; color:white" position="0 0 -1"
+        scale="0 0 0">
+        <a-animation attribute="scale" dur=1000 from="10 10 0" to="0 0 0" direction="normal" repeat="0" begin="start"></a-animation>
+        <a-animation attribute="scale" dur=1000 from="10 10 0" to="0.5 0.5 0" direction="normal" repeat="0" begin="clear"></a-animation>
+      </a-entity>
+    </a-entity>
+
+    <!-- Ground -->
+    <a-grid id="maze-grid" src="./images/grass.png" width="1000" height="1000" static-body material="shader:flat; repeat:300 300"></a-grid>
+
+    <!-- Sun -->
+    <a-entity geometry=" primitive: plane; height: 9; width: 9" position="20 55 -50" material="shader: standard; transparent: true; side: double; true; src: url(images/sun.png)">
+    </a-entity>
+
+    <!-- Clouds -->
+    <a-entity position="50 0 50">
+      <a-entity geometry="primitive: box; depth: 3; height: 1; width: 2" position="-25 20 10" material="shader: standard; opacity: 0.8; color: #fff">
+      </a-entity>
+      <a-entity geometry="primitive: box; depth: 5; height: 1; width: 2" position="-40 20 -30" material="shader: standard; opacity: 0.8; color: #fff">
+      </a-entity>
+      <a-entity geometry="primitive: box; depth: 3; height: 1; width: 2" position="-10 20 -50" material="shader: standard; opacity: 0.8; color: #fff">
+      </a-entity>
+      <a-entity geometry="primitive: box; depth: 5; height: 1; width: 2" position="-20 20 -35" material="shader: standard; opacity: 0.8; color: #fff">
+      </a-entity>
+      <a-entity geometry="primitive: box; depth: 5; height: 1; width: 2" position="-10 20 -20" material="shader: standard; opacity: 0.8; color: #fff">
+      </a-entity>
+      <a-entity geometry="primitive: box; depth: 3; height: 1; width: 2" position="-12 20 -20" material="shader: standard; opacity: 0.8; color: #fff">
+      </a-entity>
+      <a-entity geometry="primitive: box; depth: 5; height: 1; width: 2" position="0 20 -10" material="shader: standard; opacity: 0.8; color: #fff">
+      </a-entity>
+      <a-entity geometry="primitive: box; depth: 2; height: 1; width: 2" position="-28 20 -10" material="shader: standard; opacity: 0.8; color: #fff">
+      </a-entity>
+    </a-entity>
+
+    <!-- sky -->
+    <a-sky color="#a9c8e3"></a-sky>
+
+    <!-- Lighting -->
+    <a-light type="ambient" color="#bbb"></a-light>
+    <a-light color="#ccc" position="0 30 0" distance="100" intensity="0.4" type="point"></a-light>
+    <a-light color="#ccc" position="3 10 -10" distance="50" intensity="0.4" type="point"></a-light>
+  </a-scene>
+
+</body>
+
+</html>

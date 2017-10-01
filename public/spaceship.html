@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+    <title>Space Ship - A-Frame</title>
+    <meta name="description" content="Space Ship - A-Frame">
+    <script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v3.11.2/dist/aframe-extras.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
+    <script src="./js/firebase.js"></script>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+
+    <script src="./js/spaceship.js"></script>
+
+  </head>
+  <body onload="onloadFunction();">
+    <div>
+      <img id="img-tsu" src="./images/tsu.jpg" height=30px style="position:absolute; top:5px; left:5px; z-index:999; opacity:0.3"></img>
+      <img id="img-ku" src="./images/ku.jpg" height=30px style="position:absolute; top:5px; left:40px; z-index:999; opacity:0.3"></img>
+      <img id="img-ru" src="./images/ru.jpg" height=30px style="position:absolute; top:5px; left:70px; z-index:999; opacity:0.3"></img>
+      <img id="img-ke" src="./images/ke.jpg" height=30px style="position:absolute; top:5px; left:100px; z-index:999; opacity:0.3"></img>
+      <img id="img-xe" src="./images/xe.jpg" height=30px style="position:absolute; top:5px; left:134px; z-index:999; opacity:0.3"></img>
+      <img id="img-ex" src="./images/ex.jpg" height=30px style="position:absolute; top:5px; left:165px; z-index:999; opacity:0.3"></img>
+      <input id="lapText" type="text" value="00:00" style="position:absolute; top:5px; right:45px; z-index:999; width:40px; background-color:transparent; text-align:center; color:white;">
+      <img id="img-qrcode" src="./images/qrcode.png" height="30px" onclick="openQRcode();"; style="position:absolute; top:5px; right:5px; z-index:999;"></img>
+    </div>
+    <a-scene id="scene_id" vr-mode-ui="enabled:false;">
+      <a-assets>
+        <img id="tsu" src="./images/tsu.jpg">
+        <img id="ku" src="./images/ku.jpg">
+        <img id="ru" src="./images/ru.jpg">
+        <img id="ke" src="./images/ke.jpg">
+        <img id="xe" src="./images/xe.jpg">
+        <img id="ex" src="./images/ex.jpg">
+      </a-assets>
+
+      <a-camera id="camera_id" get-point cnt-time look-controls-enabled=true wasd-controls-enabled=false>
+        <a-entity id="text_id" text="align:center; baseline:center; value:3; width:10; height:10" position="0 0 -2" scale="0 0 0">
+          <a-animation attribute="scale" dur=1000 from="10 10 0" to="0 0 0" direction="normal" repeat="0" begin="start"></a-animation>
+          <a-animation attribute="scale" dur=1000 from="10 10 0" to="0.5 0.5 0" direction="normal" repeat="0" begin="clear"></a-animation>
+        </a-entity>
+      </a-camera>
+
+      <a-entity id="space_ship_id" gltf-model-next="src: url(./models/discovery/scene.gltf);" scale="0.1 0.1 0.1" position="0 -100 0"></a-entity>
+      <a-sky src="./images/space1.jpg" rotation="-45 -90 0"></a-sky>
+    </a-scene>
+
+  </body>
+</html>
