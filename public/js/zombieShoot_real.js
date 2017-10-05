@@ -215,7 +215,14 @@ function openQRcode() {
   $.dialog({
     theme: 'light',
     title: 'お友達に教えてね',
-    content: '<center><img src="./qrcode/zombieShoot_real.png"></img></center>',
+    content: '<center><img src="./qrcode/zombieShoot_real.png"></img><br />' +
+    '<HR>' +
+    '本作品では、以下の3Dモデルを利用させていただいております。<br />' +
+    '<a href="https://skfb.ly/EAzP" target="_blank">DOOM3 - Hell Knight</a>,' + 
+    '<a href="https://skfb.ly/PWw8" target=j"_blank">Zombie Model animation</a>, <br />' + 
+    '<a href="https://skfb.ly/6nAZ7" target=j"_blank">Giant Ironstone bug</a>,' + 
+    '<a href="https://skfb.ly/LtnY" target="_blank">fort ord room</a>' + 
+    '</center>',
     closeIcon: true,
   })
 };

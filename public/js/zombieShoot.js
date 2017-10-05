@@ -193,7 +193,11 @@ function openQRcode() {
   $.dialog({
     theme: 'light',
     title: 'お友達に教えてね',
-    content: '<center><img src="./qrcode/zombieShoot.png"></img></center>',
+    content: '<center><img src="./qrcode/zombieShoot.png"></img><br />' +
+    '<HR>' +
+    '本作品はMinecraftのコンテンツを利用しています。<br />' +
+    'Mojang © 2009-2017. "Minecraft" は Mojang Synergies AB の登録商標です<br />' +
+    '<a href="https://account.mojang.com/terms?ref=ft" target="_blank">利用条件</a></center>',
     closeIcon: true,
   })
 };

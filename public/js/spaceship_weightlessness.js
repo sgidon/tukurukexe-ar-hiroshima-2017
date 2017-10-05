@@ -18,7 +18,7 @@ function randomPos(xRng, yRng, zRng) {
 function initSpace() {
   // チリに見立てたパーティクルを配置する。
   var sceneObj = document.getElementById("scene_id");
-  for (var i = 1; i <= 1000; i++) {
+  for (var i = 1; i <= 100; i++) {
     var sphere = document.createElement("a-sphere");
     sphere.id = "sphere" + (("0000" + i).slice(-4));
     sphere.setAttribute("class", "sphere-class");
@@ -163,7 +163,10 @@ function openQRcode() {
   $.dialog({
     theme: 'light',
     title: 'お友達に教えてね',
-    content: '<center><img src="./qrcode/spaceship_weightlessness.png"></img></center>',
+    content: '<center><img src="./qrcode/spaceship_weightlessness.png"></img><br />' +
+    '<HR>' +
+    '本作品では、以下の3Dモデルを利用させていただいております。<br />' +
+    '<a href="https://skfb.ly/6oO9S" traget="_blank">discovery</a></center>',
     closeIcon: true,
   })
 };
@@ -199,3 +202,14 @@ function onloadFunction() {
 
 };
 
+// カメラと位置を同期させる
+AFRAME.registerComponent('camera-position', {
+  schema: {
+  },
+  init: function () {
+  },
+  tick: function () {
+    var camera_pos = this.el.sceneEl.camera.el.object3D.position;
+    this.el.object3D.position.set(camera_pos.x, camera_pos.y, camera_pos.z);
+  }
+});

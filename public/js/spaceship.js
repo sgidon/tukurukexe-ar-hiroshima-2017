@@ -18,7 +18,7 @@ function randomPos(xRng, yRng, zRng) {
 function initSpace() {
   // チリに見立てたパーティクルを配置する。
   var sceneObj = document.getElementById("scene_id");
-  for (var i = 1; i <= 1000; i++) {
+  for (var i = 1; i <= 100; i++) {
     var sphere = document.createElement("a-sphere");
     sphere.id = "sphere" + (("0000" + i).slice(-4));
     sphere.setAttribute("class", "sphere-class");
@@ -70,7 +70,10 @@ function openQRcode() {
   $.dialog({
     theme: 'light',
     title: 'お友達に教えてね',
-    content: '<center><img src="./qrcode/spaceship.png"></img></center>',
+    content: '<center><img src="./qrcode/spaceship.png"></img><br />' +
+    '<HR>' +
+    '本作品では、以下の3Dモデルを利用させていただいております。<br />' +
+    '<a href="https://skfb.ly/6oO9S" target="_blank">discovery</a></center>',
     closeIcon: true,
   })
 };
