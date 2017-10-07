@@ -199,3 +199,14 @@ function onloadFunction() {
 
 };
 
+// カメラと位置を同期させる
+AFRAME.registerComponent('camera-position', {
+  schema: {
+  },
+  init: function () {
+  },
+  tick: function () {
+    var camera_pos = this.el.sceneEl.camera.el.object3D.position;
+    this.el.object3D.position.set(camera_pos.x, camera_pos.y, camera_pos.z);
+  }
+});
