@@ -87,8 +87,10 @@ function start_js() {
 
         // START後の動作を記載する。
         updateStatus("start", zombieDeathCnt);
-        createZombie();
-
+        // modelデータ読み込み遅延を考慮して、5秒だけスタートを遅らせる。
+        setTimeout(() => {
+          createZombie();
+        }, 5000);
       }, 1100);
     }, 1100);
   }, 1100);
